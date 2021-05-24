@@ -1,23 +1,12 @@
-import csv
 import icedetection
+import matplotlib
 
-lidar = []
-radar = []
-
-f = open('lidar1.txt', newline='')
-dataset = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
-for row in dataset:
-    rowlist = []
-    for value in row:
-        rowlist.append(value)
-    lidar.append(rowlist)
-f.close()
-
-f = open('radar1.txt', newline='')
-dataset = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
-for row in dataset:
-    rowlist = []
-    for value in row:
-        rowlist.append(value)
-    radar.append(rowlist)
-f.close()
+def model1():
+    icedetection.Ice.lidar1()
+    icedetection.Ice.radar1()
+    matplotlib.pyplot.xlim(0, 99) # Environment needs to be set
+    matplotlib.pyplot.ylim(0, 99)
+    matplotlib.pyplot.imshow(icedetection.Ice.lidar_set, icedetection.Ice.radar_set)
+    
+    
+model1()
