@@ -9,7 +9,6 @@ class Ice:
         self.radar_set2 = radar_set2
         
     def lidar1(self, lidar_set1):
-        lidar_set1 = []
         f = open('lidar1.txt', newline='')
         dataset_lidar1 = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in dataset_lidar1:
