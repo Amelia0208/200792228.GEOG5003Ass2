@@ -3,6 +3,8 @@ import csv
 class Ice:
     # Set variables
     def __init__(self, lidar_set1, radar_set1, lidar_set2, radar_set2):
+        self.x = [range(299)]
+        self.y = [range(299)]
         self.lidar_set1 = lidar_set1
         self.radar_set1 = radar_set1
         self.lidar_set2 = lidar_set2

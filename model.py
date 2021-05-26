@@ -47,10 +47,15 @@ for row in dataset_radar2:
     radar_set2.append(rowlist_radar2)
 f.close()
 
-print(lidar_set1)
 
-matplotlib.pyplot.xlim(0, 99) # Environment needs to be set
-matplotlib.pyplot.ylim(0, 99)
-matplotlib.pyplot.imshow(lidar_set1, radar_set1)
+def model1():
+    matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
+    matplotlib.pyplot.ylim(0, 299)
+    matplotlib.pyplot.imshow(lidar_set1)
     
+def model2():
+    matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
+    matplotlib.pyplot.ylim(0, 299)
+    matplotlib.pyplot.imshow(lidar_set2)
     
+model2()
