@@ -51,11 +51,23 @@ f.close()
 def model1():
     matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
     matplotlib.pyplot.ylim(0, 299)
-    matplotlib.pyplot.imshow(lidar_set1)
+    for i in range(299):
+        for j in range(299):
+            if radar_set1[i][j] >= 100:
+                radar_set1[i][j] = 1
+            else:
+                radar_set1[i][j] = 0
+    matplotlib.pyplot.imshow(radar_set1)
     
 def model2():
     matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
     matplotlib.pyplot.ylim(0, 299)
-    matplotlib.pyplot.imshow(lidar_set2)
+    for i in range(299):
+        for j in range(299):
+            if radar_set2[i][j] >= 100:
+                radar_set2[i][j] = 1
+            else:
+                radar_set2[i][j] = 0
+    matplotlib.pyplot.imshow(radar_set2)
     
 model2()
