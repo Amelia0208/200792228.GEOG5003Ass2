@@ -51,23 +51,39 @@ f.close()
 def model1():
     matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
     matplotlib.pyplot.ylim(0, 299)
+    
+    volume = 0
+    
     for i in range(299):
         for j in range(299):
             if radar_set1[i][j] >= 100:
                 radar_set1[i][j] = 1
+                volume = volume + lidar_set1[i][j]
             else:
                 radar_set1[i][j] = 0
+                
+    mass = volume * 900
+    
+    if mass <= 36000000:
+        can_pull = 'yes'
+    else:
+        can_pull = 'no'
+    
+    print('Volume: ' + str(volume) + '\nMass: ' + str(mass) + '\nCan be pulled: ' + str(can_pull))
+    
     matplotlib.pyplot.imshow(radar_set1)
     
 def model2():
     matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
     matplotlib.pyplot.ylim(0, 299)
+    
     for i in range(299):
         for j in range(299):
             if radar_set2[i][j] >= 100:
                 radar_set2[i][j] = 1
             else:
                 radar_set2[i][j] = 0
+    
     matplotlib.pyplot.imshow(radar_set2)
     
-model2()
+model1()
