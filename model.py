@@ -83,6 +83,8 @@ def model2():
     
     vol = 0
     volume = []
+    mass = []
+    can_pull = []
     
     for i in range(299):
         for j in range(299):
@@ -111,8 +113,13 @@ def model2():
                                         vol = vol + radar_set2[k][m]
                         volume.append(vol)
                         vol = 0
+                        
+    for i in range(len(volume)):
+        ice_mass = volume[i] * 900
+        mass.append(ice_mass)
                                     
     print(volume)
+    print(mass)
     
     matplotlib.pyplot.imshow(radar_set2)
     
