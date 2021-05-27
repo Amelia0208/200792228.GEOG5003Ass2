@@ -110,16 +110,24 @@ def model2():
                                     if radar_set2[k][m] == 0:
                                         break
                                     else:
-                                        vol = vol + radar_set2[k][m]
+                                        vol = vol + lidar_set2[k][m]
                         volume.append(vol)
                         vol = 0
                         
     for i in range(len(volume)):
         ice_mass = volume[i] * 900
         mass.append(ice_mass)
+        
+    for i in range(len(volume)):
+        if mass[i] <=36000000:
+            can_pull_ice = 'yes'
+        else:
+            can_pull_ice = 'no'
+        can_pull.append(can_pull_ice)
                                     
     print(volume)
     print(mass)
+    print(can_pull)
     
     matplotlib.pyplot.imshow(radar_set2)
     
