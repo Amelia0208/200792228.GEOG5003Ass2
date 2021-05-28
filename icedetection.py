@@ -14,7 +14,8 @@ class Ice:
         self.can_pull = []
         
   
-    def call_1_():
+  # Read data for model 1 
+  def call_1_():
         f = open('lidar2.txt', newline='')
         dataset_lidar = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in dataset_lidar:
@@ -35,6 +36,7 @@ class Ice:
         f.close()
         
         
+    # Read data for model 2
     def call_2_(self, radar_set, lidar_set):
         f = open('lidar2.txt', newline='')
         dataset_lidar = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
@@ -56,6 +58,7 @@ class Ice:
         f.close()
         
         
+    # Reclassify radar data to show ice / no ice
     def identify_ice():
         for i in range(299):
             for j in range(299):
@@ -65,6 +68,7 @@ class Ice:
                     radar_set[i][j] = 0
                     
                     
+    # Create an array of volumes for each iceberg in data
     def calc_volume():
         for i in range(1, 298):
             for j in range(1, 298):
@@ -88,12 +92,14 @@ class Ice:
                             vol = 0
                             
                             
+    # Create an array of mass for each iceberg
     def calc_mass():
         for i in range(len(volume)):
             ice_mass = volume[i] * 900
             mass.append(ice_mass)
             
             
+    # Create an array for abaility to pull each iceberg
     def calc_can_pull():
         for i in range(len(volume)):
             if mass[i] <=36000000:
@@ -102,10 +108,12 @@ class Ice:
                 can_pull_ice = 'no'
             can_pull.append(can_pull_ice)
             
+    # Print out volume, mass and ability to pull for each iceberg
     def print_results():
         for i in range(len(volume)):
             print('Iceberg ' + str(i + 1) + ':\nVolume: ' + str(volume[i]) + '\nMass: ' + str(mass[i]) + '\nCan be pulled: ' + str(can_pull[i]) + '\n\n')
         
+    # Plot classified radar to show ice / no ice
     def plot():
         matplotlib.pyplot.xlim(0, 299) # Environment needs to be set
         matplotlib.pyplot.ylim(0, 299)
