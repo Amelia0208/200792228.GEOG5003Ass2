@@ -3,6 +3,7 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as pyplot
 import csv
 import tkinter
+import os
 
 # Set empty parameters for data
 lidar_set = [] 
@@ -12,6 +13,14 @@ mass = []
 mass_above = []
 can_pull = []
 
+# Open directory for output
+dir = os.getcwd()
+basedir = os.path.dirname(dir)
+# print(basedir)
+datadir = os.path.join(basedir, 'data')
+# print(datadir)
+outputdatadir = os.path.join(datadir, 'output')
+# print(outputdatadir)
 
 # Initialise main page
 root = tkinter.Tk()
@@ -36,6 +45,9 @@ def identify_ice():
                 radar_set[i][j] = 1
             else:
                 radar_set[i][j] = 0
+    '''pyplot.xlim(0, 299)
+    pyplot.ylim(0, 299)  
+    pyplot.imshow(radar_set)'''          
                     
                     
 # Calculate the total volume of each block of ice
@@ -61,13 +73,15 @@ def calc_volume():
                                         vol = vol + lidar_set[k][m] # Volume for individual ice block
                         volume.append(vol) # Create an array for volume of each
                         vol = 0 # Set volume back to 0 after each ice block to calculate individuals
-                            
+    # print(volume)
+                        
                             
 # Calculate mass of each ice block within volume array
 def calc_mass():
     for i in range(len(volume)):
         ice_mass = volume[i] * 900
         mass.append(ice_mass) # Create an array of mass
+     # print(mass)
         
         
 # Calculate total mass above water for each iceberg
@@ -75,6 +89,7 @@ def mass_above_water():
     for i in range(len(mass)):
         iceberg = mass[i] / 10
         mass_above.append(iceberg)
+    # print(mass_above_water)
             
             
 # Calculate if able to pull each ice block in array (can only pull if less than 36 million kg)
@@ -85,6 +100,8 @@ def calc_can_pull():
         else:
             can_pull_ice = 'no'
         can_pull.append(can_pull_ice) # Create array for ability to pull
+    # print(can_pull)
+        
             
 # Print volume, mass and ability to move for each ice block in data, separately
 def print_results():
@@ -97,6 +114,22 @@ def plot():
     pyplot.xlim(0, 299) # Environment needs to be set
     pyplot.ylim(0, 299)  
     pyplot.imshow(radar_set)
+
+
+# Write to an output file
+def output():
+    file = os.path.join(outputdatadir, 'dataout.csv') # Print our radar into a file
+    with open(file, 'w', newline='') as f2:
+        writer = csv.writer(f2, delimiter=' ')
+        for row in radar_set:
+            writer.writerow(row)
+            
+    out = print_results()
+    file = os.path.join(outputdatadir, 'dataout2.txt') # Print out ice vol/mass/can_pull to file
+    with open(file, "a") as f3:
+        f3.write(str(out) + "\n")
+        f3.flush  
+    f3.close
 
 
 # Run the model for first dataset
@@ -122,6 +155,11 @@ def model1():
         radar_set.append(rowlist_radar)
     f.close()
     
+    '''pyplot.xlim(0, 299)
+    pyplot.ylim(0, 299)  
+    pyplot.imshow(radar_set)
+    pyplot.imshow(lidar_set)'''
+    
     # Run based on data input above
     identify_ice()
     calc_volume()
@@ -130,7 +168,7 @@ def model1():
     calc_can_pull()
     print_results()
     plot()
-    
+    output()
     
 
 
@@ -156,6 +194,11 @@ def model2():
         radar_set.append(rowlist_radar)
     f.close()
     
+    '''pyplot.xlim(0, 299)
+    pyplot.ylim(0, 299)  
+    pyplot.imshow(radar_set)
+    pyplot.imshow(lidar_set)'''
+    
     # Run based on data input above
     identify_ice()
     calc_volume()
@@ -164,6 +207,8 @@ def model2():
     calc_can_pull()
     print_results()
     plot()
+    output()
+    
 
 # Set up menu on GUI to run models
 menu_bar = tkinter.Menu(root)
