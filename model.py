@@ -9,6 +9,7 @@ lidar_set = []
 radar_set = [] # These two are filled by calling on text files
 volume = []
 mass = []
+mass_above = []
 can_pull = []
 
 
@@ -67,6 +68,13 @@ def calc_mass():
     for i in range(len(volume)):
         ice_mass = volume[i] * 900
         mass.append(ice_mass) # Create an array of mass
+        
+        
+# Calculate total mass above water for each iceberg
+def mass_above_water():
+    for i in range(len(mass)):
+        iceberg = mass[i] / 10
+        mass_above.append(iceberg)
             
             
 # Calculate if able to pull each ice block in array (can only pull if less than 36 million kg)
@@ -118,6 +126,7 @@ def model1():
     identify_ice()
     calc_volume()
     calc_mass()
+    mass_above_water()
     calc_can_pull()
     print_results()
     plot()
@@ -151,6 +160,7 @@ def model2():
     identify_ice()
     calc_volume()
     calc_mass()
+    mass_above_water()
     calc_can_pull()
     print_results()
     plot()
